@@ -39,4 +39,4 @@ $result = getResult([1, 2, 1, 5, 1, 3, 5, 2, 5, 5], 6);
 var_dump($result); // Выводим результат: 3
 
 $result = getResult([2, 4, 3, 6, 1], 5);
-var_dump($result); // Выводим результат: 3
+var_dump($result); // Выводим результат: 2
