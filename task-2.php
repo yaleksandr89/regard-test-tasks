@@ -44,13 +44,10 @@ class Order extends Model
         // Формируем массив с результатами
         $result = [];
         foreach ($orders as $order) {
-            // Используем аксессор для получения полного имени
-            $fullName = $order->manager ? $order->manager->full_name : 'No Manager';
-
             // Добавляем информацию о заказе и имени менеджера в результирующий массив
             $result[] = [
                 'order_id' => $order->id,
-                'fullName' => $fullName,
+                'fullName' => $order?->full_name ?? 'No Manager', // Используем аксессор getFullNameAttribute()
             ];
         }
 
