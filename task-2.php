@@ -10,9 +10,6 @@
  */
 
 
-// Если я правильно понял это задание не требуется запускать.
-// Нужно написать логику взаимодействия моделей с использованием ORM Eloquent. Поэтому Laravel устанавливать не стал, а только описал
-// методы моделей (если требуется развернуть фреймворк - могу это сделать).
 class Manager extends Model
 {
     // Свойства модели
@@ -24,6 +21,12 @@ class Manager extends Model
         'firstName',
         'lastName',
     ];
+
+    // Аксессор для полного имени
+    public function getFullNameAttribute(): string
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
 }
 
 class Order extends Model
@@ -41,10 +44,8 @@ class Order extends Model
         // Формируем массив с результатами
         $result = [];
         foreach ($orders as $order) {
-            // Проверяем наличие менеджера и формируем полное имя
-            $fullName = $order->manager ?
-                $order->manager->firstName.' '.$order->manager->lastName :
-                'No Manager';
+            // Используем аксессор для получения полного имени
+            $fullName = $order->manager ? $order->manager->full_name : 'No Manager';
 
             // Добавляем информацию о заказе и имени менеджера в результирующий массив
             $result[] = [
